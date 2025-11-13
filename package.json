@@ -1,25 +1,18 @@
 {
-  "name": "iniity-|-identity-federation-platform",
+  "name": "iniity-platform-monorepo",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "description": "Monorepo for the Iniity Identity Federation Platform.",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "npm run dev --workspace=webapp",
+    "build": "npm run build --workspace=webapp",
+    "install-all": "npm install"
   },
-  "dependencies": {
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "@google/genai": "^1.29.1",
-    "express": "^5.1.0",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3"
-  },
-  "devDependencies": {
-    "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.0.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
-  }
+  "workspaces": [
+    "webapp",
+    "packages/*",
+    "services/*"
+  ],
+  "author": "Aaron Lyon Phillips Lubimiv",
+  "license": "MIT"
 }

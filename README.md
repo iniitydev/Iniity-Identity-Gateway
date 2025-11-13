@@ -1,4 +1,3 @@
-
 <div align="center">
   <img src="https://raw.githubusercontent.com/user-attachments/assets/dd3571d8-f860-4963-8a9d-b8d4f6c4cd2e" width="120px" alt="Iniity Logo" />
   <h1 align="center">Iniity | The Identity Federation Platform</h1>
@@ -23,13 +22,7 @@
 
 ---
 
-## The Challenge: A Crisis of Complexity
-
-In today's distributed world, identity and access management (IAM) has become a labyrinth. Monolithic, legacy systems are too heavy, while a disorganized collection of modern tools creates redundancy, security gaps, and a nightmare of operational complexity. We are caught between old giants that can't adapt and new specialists that don't cooperate.
-
-This is the problem **Iniity** was born to solve.
-
-## The Vision: From the Desk of the Founder
+## The Vision: A Codified Architectural Doctrine
 
 > "We are moving beyond the era of monolithic identity providers. The future is a symphony of specialized services, each performing its role with precision and excellence. The challenge isn't a lack of tools, but a lack of a blueprint—a coherent philosophy for orchestrating them. Iniity is that blueprint, brought to life. It’s a tool for architects and a classroom for developers, designed to make the power of federated identity intuitive, visual, and accessible to all."
 >
@@ -48,8 +41,6 @@ Our recommended framework consists of three distinct layers:
 | **1. The Gateway & Enforcer**  | **Authentik**      | The user-facing SSO portal and application gateway. It protects all apps (even legacy ones) with forward-auth, enforces MFA, and manages access policies. |
 | **2. The Core IdP & User Source** | **Zitadel**        | The lightweight, multi-tenant "source of truth" for all user accounts. It manages the core identity and provisions users to other applications via SCIM. |
 | **3. The User Data Plane**     | **Nextcloud**      | The user's "home base" application for files, communication, and collaboration. It consumes identity via OIDC and is provisioned by the Core IdP. |
-
-This model provides a clean separation of concerns, leveraging best-in-class, cloud-native tools to build a resilient, scalable, and manageable identity infrastructure.
 
 ## ✨ Key Features
 

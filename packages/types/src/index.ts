@@ -1,3 +1,5 @@
+import type * as React from 'react';
+
 export interface Role {
   title: string;
   system: string;
@@ -5,6 +7,7 @@ export interface Role {
   strength: string;
   details: string[];
   color: string;
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
 export interface SummaryRow {
@@ -35,7 +38,6 @@ export interface ChatMessage {
   role: 'user' | 'model';
   parts: { text: string }[];
   groundingMetadata?: GroundingMetadata;
-  policy?: Policy;
 }
 
 export interface DataFlowStep {
@@ -77,6 +79,8 @@ export interface Policy {
     action: 'allow' | 'deny';
     protocol: 'ssh' | 'https' | 'all';
   };
+  generatedBy?: 'AI' | 'user';
+  rationale?: string;
 }
 
 export interface IniityEvent {
@@ -86,4 +90,32 @@ export interface IniityEvent {
   agent: 'idn-hypervisor' | 'p2p-dns-agent' | 'policy-engine' | 'auth-gateway';
   message: string;
   payload: Record<string, any>;
+}
+
+// Types for the new User Center View
+export interface UserProfile {
+    did: string;
+    name: string;
+    email: string;
+    avatarUrl: string;
+    createdAt: string;
+}
+
+export interface UserSession {
+    id: string;
+    device: string;
+    os: string;
+    location: string;
+    ip: string;
+    lastAccessed: string;
+    isCurrent: boolean;
+}
+
+export interface ConnectedApplication {
+    id: string;
+    name: string;
+    logoUrl: string;
+    description: string;
+    scopes: string[];
+    connectedAt: string;
 }

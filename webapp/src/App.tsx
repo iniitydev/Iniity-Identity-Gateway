@@ -6,8 +6,9 @@ import { BlueprintView } from './views/BlueprintView';
 import { OperationsView } from './views/OperationsView';
 import { FleetView } from './views/FleetView';
 import { PolicyEditorView } from './views/PolicyEditorView';
+import { UserCenterView } from './views/UserCenterView';
 
-export type AppView = 'Blueprint' | 'Operations' | 'Fleet' | 'Policies';
+export type AppView = 'Blueprint' | 'Operations' | 'Fleet' | 'Policies' | 'UserCenter';
 
 const App: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -23,6 +24,8 @@ const App: React.FC = () => {
         return <FleetView />;
       case 'Policies':
         return <PolicyEditorView />;
+      case 'UserCenter':
+        return <UserCenterView />;
       default:
         return <BlueprintView />;
     }

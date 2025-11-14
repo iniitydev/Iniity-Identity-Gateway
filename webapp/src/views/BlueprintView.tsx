@@ -6,16 +6,13 @@ import { Modal } from '../components/Modal';
 import { ArchitectureDiagram } from '../components/ArchitectureDiagram';
 import { ExportIcon } from '../components/icons/ExportIcon';
 import { FlowIcon } from '../components/icons/FlowIcon';
-// Fix: Removed non-existent 'mockEvents' from import.
 import { ARCHITECTURE_CONTEXT, roles, summaryData } from '../constants';
 import { generateDataFlow, getQuickAnalysis } from '../services/geminiService';
-// Fix: Removed unused 'IniityEvent' type import.
 import type { Role, SummaryRow, DataFlowStep } from '@iniity/types';
 import { DataFlowVisualizer } from '../components/DataFlowVisualizer';
 import { BrainIcon } from '../components/icons/BrainIcon';
 
 
-// Fix: Removed API key props as they are no longer needed.
 export const BlueprintView: React.FC = () => {
   const [isDataFlowModalOpen, setIsDataFlowModalOpen] = useState(false);
   const [isExportModalOpen, setIsExportModalOpen] = useState(false);
@@ -33,7 +30,6 @@ export const BlueprintView: React.FC = () => {
     setError(null);
     setDataFlowSteps([]);
     try {
-      // Fix: Call service function without API key.
       const steps = await generateDataFlow(ARCHITECTURE_CONTEXT);
       setDataFlowSteps(steps);
     } catch (err) {
@@ -62,7 +58,6 @@ export const BlueprintView: React.FC = () => {
     setAnalysisContent('');
     setIsLoading(true);
     try {
-        // Fix: Call service function without API key.
         const result = await getQuickAnalysis(role.system, role.function);
         setAnalysisContent(result);
     } catch (err) {
@@ -83,7 +78,7 @@ export const BlueprintView: React.FC = () => {
 
       <ArchitectureDiagram />
 
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-16">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 my-16">
         {roles.map((role: Role) => (
             <div key={role.system} className="flex flex-col">
                 <RoleCard {...role} />

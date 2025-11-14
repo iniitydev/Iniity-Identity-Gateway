@@ -5,7 +5,7 @@ import { BlueprintIcon } from './icons/BlueprintIcon';
 import { TerminalIcon } from './icons/TerminalIcon';
 import { DeviceIcon } from './icons/DeviceIcon';
 import { PolicyIcon } from './icons/PolicyIcon';
-import { SettingsIcon } from './icons/SettingsIcon';
+import { UserCircleIcon } from './icons/UserCircleIcon';
 
 interface MainHeaderProps {
   activeView: AppView;
@@ -20,9 +20,9 @@ const NavButton: React.FC<{
 }> = ({ label, icon, isActive, onClick }) => (
   <button
     onClick={onClick}
-    className={`flex flex-col sm:flex-row items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+    className={`flex flex-col sm:flex-row items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
       isActive
-        ? 'bg-indigo-600 text-white'
+        ? 'bg-indigo-600 text-white shadow-[0_0_15px_rgba(129,140,248,0.5)]'
         : 'text-gray-300 hover:bg-gray-700 hover:text-white'
     }`}
     aria-current={isActive ? 'page' : undefined}
@@ -46,16 +46,16 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ activeView, setActiveVie
           </div>
 
           {/* Center: Navigation */}
-          <nav className="flex items-center space-x-2 sm:space-x-4 bg-gray-800/50 p-1 rounded-lg">
+          <nav className="flex items-center space-x-1 sm:space-x-2 bg-gray-800/50 p-1 rounded-lg">
             <NavButton label="Blueprint" icon={<BlueprintIcon />} isActive={activeView === 'Blueprint'} onClick={() => setActiveView('Blueprint')} />
             <NavButton label="Operations" icon={<TerminalIcon />} isActive={activeView === 'Operations'} onClick={() => setActiveView('Operations')} />
             <NavButton label="Fleet" icon={<DeviceIcon />} isActive={activeView === 'Fleet'} onClick={() => setActiveView('Fleet')} />
             <NavButton label="Policies" icon={<PolicyIcon />} isActive={activeView === 'Policies'} onClick={() => setActiveView('Policies')} />
+            <NavButton label="UserCenter" icon={<UserCircleIcon />} isActive={activeView === 'UserCenter'} onClick={() => setActiveView('UserCenter')} />
           </nav>
 
           {/* Right: Actions */}
-          {/* Fix: Remove settings button as API key is handled by environment variable. */}
-          <div className="flex items-center w-28 justify-end">
+          <div className="flex items-center w-28 sm:w-36 justify-end">
             {/* Placeholder for potential future actions */}
           </div>
         </div>

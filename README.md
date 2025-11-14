@@ -1,58 +1,85 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/user-attachments/assets/dd3571d8-f860-4963-8a9d-b8d4f6c4cd2e" width="120px" alt="Iniity Logo" />
-  <h1 align="center">Iniity | The Identity Federation Platform</h1>
+  <h1 align="center">Iniity V7: The Sovereign Control Plane</h1>
   <p align="center">
-    <strong>A modern, interactive platform for designing, visualizing, and mastering next-generation identity federation architectures.</strong>
+    <strong>An Orchestration Platform for the Next Generation of Federated Identity & Networking.</strong>
     <br />
     <br />
-    <em>Powered by <a href="#-tech-stack">Google Gemini</a>, Ethr.Cloud Concepts, and AuthO.iD Principles.</em>
+    <em>This is not just a tool; it is a codified doctrine for digital sovereignty.</em>
   </p>
   <p align="center">
-    <a href="#">
+    <a href="LICENSE">
       <img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg"/>
     </a>
     <a href="#">
       <img alt="Build Status" src="https://img.shields.io/badge/build-passing-brightgreen.svg"/>
     </a>
     <a href="#">
-      <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg"/>
+      <img alt="Version" src="https://img.shields.io/badge/version-v7.0.0-blue.svg"/>
     </a>
   </p>
 </div>
 
 ---
 
-## The Vision: A Codified Architectural Doctrine
+## The Manifesto
 
-> "We are moving beyond the era of monolithic identity providers. The future is a symphony of specialized services, each performing its role with precision and excellence. The challenge isn't a lack of tools, but a lack of a blueprint—a coherent philosophy for orchestrating them. Iniity is that blueprint, brought to life. It’s a tool for architects and a classroom for developers, designed to make the power of federated identity intuitive, visual, and accessible to all."
+For too long, the domain of identity has been dominated by monolithic, all-or-nothing solutions. They are heavy, inflexible, and ill-suited for a decentralized world. The future is not a bigger monolith; it is a **symphony of specialized services**, each performing its role with precision. The challenge is not a lack of tools, but a lack of a blueprint—a coherent philosophy for orchestrating them.
+
+**Iniity is that blueprint, brought to life.**
+
+> "We are architecting a new paradigm where identity is not a gatekeeper, but the very fabric of your personal network reality. It's an active, intelligent, and sovereign control plane for your entire digital life. This platform is the definitive implementation of that vision."
 >
-> — **Aaron Lyon Phillips Lubimiv**, Founder & Chief Architect of Iniity
+> — **Aaron Lyon Phillips Lubimiv**, Founder & Chief Architect
 
-## 🏛️ The Iniity Philosophy: The "Gateway & Core" Model
+---
 
-Iniity champions a clear, powerful architectural pattern: the **Federation of Specialists**. Instead of a single, overburdened system, we define non-overlapping roles, leveraging each component for its unique strength.
+## 📖 Essential Reading: Understanding the Vision
 
-![Architecture Diagram](https://raw.githubusercontent.com/user-attachments/assets/b8398118-80e9-4674-8b6b-3e5f488ca8c8)
+To fully grasp the Iniity doctrine, we have prepared two key documents:
 
-Our recommended framework consists of three distinct layers:
+-   **[📄 The Iniity V7 Whitepaper](./docs/WHITEPAPER_V7.md):** A high-level, promotional document that explains the philosophy, the market need, and the vision for a sovereign identity network. **Start here to understand the "Why".**
+-   **[🏛️ Architecture V7 Technical Deep Dive](./docs/docs/ARCHITECTURE_V7_TECHNICAL_DEEP_DIVE.md):** A detailed technical document for architects and developers, outlining the four pillars, their interactions, and the design principles. **Read this to understand the "How".**
 
-| Role                         | Recommended System | Core Function                                                                                              |
-| ---------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------- |
-| **1. The Gateway & Enforcer**  | **Authentik**      | The user-facing SSO portal and application gateway. It protects all apps (even legacy ones) with forward-auth, enforces MFA, and manages access policies. |
-| **2. The Core IdP & User Source** | **Zitadel**        | The lightweight, multi-tenant "source of truth" for all user accounts. It manages the core identity and provisions users to other applications via SCIM. |
-| **3. The User Data Plane**     | **Nextcloud**      | The user's "home base" application for files, communication, and collaboration. It consumes identity via OIDC and is provisioned by the Core IdP. |
+## ✨ Features at a Glance
 
-## ✨ Key Features
+The Iniity Control Plane is a multi-faceted tool for architects, developers, and end-users.
 
--   **🎨 Interactive Architecture Diagram:** A dynamic, visual representation of the core components and their relationships.
--   **⚡ AI-Powered Data Flow Generation:** Witness complex processes unfold in real-time. With a single click, the Google Gemini API generates a step-by-step visualization of the new user journey, from creation in the IdP to their first successful login.
--   **🤖 Context-Aware AI Assistant:** Have a question about the architecture? Our integrated chatbot, powered by Gemini, is pre-loaded with the entire system context to provide you with instant, accurate answers.
--   **📊 Framework Role Analysis:** Explore detailed cards for each component, outlining their function, key strengths, and specific implementation details.
--   **📋 Data Export:** Easily export the framework summary to CSV for use in presentations, spreadsheets, and architectural documentation.
+-   **🌐 Unified Digital Portal:** A seamless, single-pane-of-glass experience that unifies file management (`Desk.cx`) and identity management (`User Center`) behind a single, federated login.
+-   **🎨 Multi-Modal Visualization:** Instantly switch between different views to get a complete, 360-degree picture of your identity-defined network.
+    -   **Blueprint:** Visualize the high-level architecture, component roles, and their interactions.
+    -   **Operations:** Monitor a real-time terminal feed of system events and audit logs.
+    -   **Fleet:** View and manage the status of all connected devices in your personal network.
+    -   **Policies:** Review security and access policies, and create new ones using natural language.
+    -   **User Center:** Access a user-centric dashboard for managing personal profile, security settings, and active sessions.
+-   **⚡ AI-Powered Insights:**
+    -   **Data Flow Generation:** Witness complex processes like user onboarding unfold in real-time with step-by-step visualizations generated by the Google Gemini API.
+    -   **Policy Architect:** Use natural language to generate robust, identity-aware security policies. The AI not only creates the rule but also provides a clear rationale for its configuration.
+-   **🤖 AI Operator Assistant:** An integrated, context-aware chatbot that can answer deep architectural questions, grounded with Google Search for up-to-date information.
+
+## 🛠️ Technology Stack
+
+This project is built with a modern, robust technology stack, designed for performance and developer experience.
+
+-   **Frontend:** React, TypeScript, Vite, Tailwind CSS
+-   **AI & Machine Learning:** Google Gemini API
+-   **Project Structure:** Monorepo managed with npm Workspaces
+-   **Backend Services:** Express.js, TypeScript
+
+## 🏛️ Project Structure
+
+This repository is a monorepo, meaning it contains multiple independent packages and applications within a single codebase. This structure helps manage dependencies and ensures consistency across the platform.
+
+-   `webapp/`: The main React-based frontend application for the Iniity Control Plane.
+-   `services/`: Contains all backend microservices.
+    -   `identity-service/`: The core service for user management and identity logic (currently a stub awaiting implementation).
+-   `packages/`: Shared libraries and utilities used across different parts of the monorepo.
+    -   `types/`: A shared TypeScript package for common type definitions (e.g., `User`, `Policy`).
+-   `docs/`: Contains all project documentation, including the whitepaper and architectural deep-dive.
 
 ## 🚀 Getting Started
 
-Experience the power of Iniity on your local machine.
+To explore the Iniity Control Plane on your local machine, follow these steps.
 
 ### Prerequisites
 
@@ -75,52 +102,26 @@ Experience the power of Iniity on your local machine.
     ```
 
 3.  **Configure Environment Variables:**
-    The web application requires your Gemini API key. Create a `.env` file in the `webapp/` directory:
-    ```bash
-    # Location: ./webapp/.env
-    API_KEY="YOUR_GEMINI_API_KEY_HERE"
-    ```
+    The web application requires your Gemini API key. This key is provided by the execution environment as `process.env.API_KEY`. No local `.env` file is needed if running in a managed environment.
 
 4.  **Run the Development Server:**
     ```bash
-    # Run this command from the root directory
-    npm run dev --workspace=webapp
+    # This command specifically runs the 'webapp' development server
+    npm run dev
     ```
-    Navigate to `http://localhost:5173` to see the application live.
+    Navigate to the displayed local URL to experience the application.
 
-## 🛠️ Tech Stack & Project Structure
+## 🤝 Join the Vision: Community & Contribution
 
-Iniity is built with a modern, scalable tech stack, organized as a monorepo to manage interconnected services seamlessly.
+Iniity is more than a project; it is a movement to redefine digital identity. We believe in the power of community to build revolutionary tools. Contributions are welcome and highly encouraged!
 
--   **Frontend (`/webapp`):** React, TypeScript, Vite, Tailwind CSS
--   **AI Integration:** Google Gemini API (`@google/genai`)
--   **Backend (`/services`):** Node.js, Express, TypeScript (foundation for future logic)
--   **Shared Code (`/packages`):** Reusable types and utilities.
-
-## 🔮 The Backend Vision: `identity-service`
-
-Included in the `/services` directory is the `identity-service`, the seed of our future backend. While the current frontend operates directly with the Gemini API for visualization, this service is architected to become the "brain" of the operation.
-
-**Future capabilities will include:**
--   Managing real OIDC and SCIM communication between services.
--   Providing a stateful API for configuring and managing the federation.
--   Orchestrating user provisioning workflows.
-
-## 🤝 How to Contribute
-
-We believe in the power of community to build revolutionary tools. Contributions are welcome and highly encouraged!
-
-1.  **Fork** the repository.
-2.  Create a new **feature branch** (`git checkout -b feat/my-amazing-feature`).
-3.  **Commit** your changes (`git commit -m 'feat: Add some amazing feature'`).
-4.  **Push** to the branch (`git push origin feat/my-amazing-feature`).
-5.  Open a **Pull Request**.
-
-Please report bugs, suggest features, or ask questions through **GitHub Issues**.
+-   **📜 Code of Conduct:** Please read our [**Code of Conduct**](./CODE_OF_CONDUCT.md) to understand our commitment to a welcoming and inclusive community.
+-   **📖 Contribution Guide:** For details on our development process, branching strategy, and commit conventions, see our [**Contribution Guide**](./CONTRIBUTING.md).
+-   **💡 Get Involved:** Report bugs, suggest features, or ask questions through **GitHub Issues**.
 
 ## 📄 License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ---
 <div align="center">

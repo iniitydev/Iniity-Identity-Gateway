@@ -1,7 +1,6 @@
 import { GoogleGenAI, Chat, Type, FunctionDeclaration } from "@google/genai";
 import type { DataFlowStep, Policy } from "@iniity/types";
 
-// Fix: Initialize the GoogleGenAI client once using the environment variable.
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 // Store the active chat session.
@@ -77,7 +76,6 @@ export const getQuickAnalysis = async (componentName: string, componentDescripti
     const prompt = `Provide a concise, expert analysis of the "${componentName}" component in an IT architecture. Focus on its primary role, benefits, and potential challenges. Component description: "${componentDescription}"`;
     try {
         const response = await ai.models.generateContent({
-            // Fix: Use the correct latest model alias for gemini flash lite.
             model: 'gemini-flash-lite-latest',
             contents: prompt,
         });
@@ -91,7 +89,7 @@ export const getQuickAnalysis = async (componentName: string, componentDescripti
 
 const createPolicyFunctionDeclaration: FunctionDeclaration = {
     name: "createPolicy",
-    description: "Creates a structured security policy based on user input.",
+    description: "Creates a structured security policy based on a natural language description. Also provides a rationale for the chosen configuration.",
     parameters: {
         type: Type.OBJECT,
         properties: {
@@ -99,25 +97,32 @@ const createPolicyFunctionDeclaration: FunctionDeclaration = {
                 type: Type.STRING,
                 description: "A short, descriptive name for the policy. E.g., 'Block Phone After Hours'."
             },
+            rationale: {
+                type: Type.STRING,
+                description: "A brief explanation for why this policy is configured this way. Explain the choice of DIDs, conditions, and actions."
+            },
             if: {
                 type: Type.OBJECT,
+                description: "The conditions under which the policy applies.",
                 properties: {
-                    device: { type: Type.STRING, description: "The device type, e.g., 'Phone', 'Laptop'." },
-                    userGroup: { type: Type.STRING, description: "The user group, e.g., 'Employees', 'Admins'." },
-                    condition: { type: Type.STRING, description: "The condition to check, e.g., 'Time is after 7 PM'." },
+                    sourceDID: { type: Type.STRING, description: "The DID of the source device, or 'any'. Map device names to DIDs from the provided context." },
+                    destinationDID: { type: Type.STRING, description: "The DID of the destination device, or 'any'. Map device names to DIDs from the provided context." },
+                    condition: { type: Type.STRING, description: "Any other condition, e.g., 'user.group == \"admins\"' or 'time > 19:00'. Use 'always' if no specific condition is given." },
+                    networkLayer: { type: Type.STRING, description: "Optional network layer if specified, e.g., 'Netbird', 'Headscale', 'ZeroTier'." }
                 },
-                required: ["device", "userGroup", "condition"]
+                required: ["sourceDID", "destinationDID", "condition"]
             },
             then: {
                 type: Type.OBJECT,
+                description: "The action to take if the conditions are met.",
                 properties: {
-                    action: { type: Type.STRING, description: "The action to take, e.g., 'Deny'." },
-                    resource: { type: Type.STRING, description: "The resource the action applies to, e.g., 'Work Files'." }
+                    action: { type: Type.STRING, description: "The action to take: 'allow' or 'deny'." },
+                    protocol: { type: Type.STRING, description: "The network protocol mentioned: 'ssh', 'https', or 'all'." }
                 },
-                required: ["action", "resource"]
+                required: ["action", "protocol"]
             }
         },
-        required: ["name", "if", "then"]
+        required: ["name", "if", "then", "rationale"]
     }
 };
 
@@ -128,9 +133,20 @@ const createPolicyFunctionDeclaration: FunctionDeclaration = {
  */
 export const generatePolicyFromPrompt = async (prompt: string): Promise<Policy | null> => {
     try {
+        const fullPrompt = `You are an expert security policy architect. Your task is to translate a user's request into a precise, structured policy.
+        Use the following device DID context to map friendly names to their identifiers. Be intelligent about interpreting the user's intent.
+        
+        Device DID Context:
+        - Aarons-MacBook-Pro: did:iniity:device:macbook-pro-aaron
+        - iPhone 15 Pro: did:iniity:device:iphone-15-pro
+        - Home Server: did:iniity:device:home-server-truenas
+        - Work Dell XPS: did:iniity:device:work-laptop-dell
+        
+        User Request: "${prompt}"`;
+
         const response = await ai.models.generateContent({
             model: 'gemini-2.5-flash',
-            contents: `Based on the user's request, create a policy. Request: "${prompt}"`,
+            contents: fullPrompt,
             config: {
                 tools: [{ functionDeclarations: [createPolicyFunctionDeclaration] }]
             }
@@ -139,12 +155,23 @@ export const generatePolicyFromPrompt = async (prompt: string): Promise<Policy |
         const functionCall = response.functionCalls?.[0];
 
         if (functionCall && functionCall.name === 'createPolicy') {
-            // The arguments from the model are already a structured object
-            const policyArgs = functionCall.args;
+            const args = functionCall.args as any;
             const newPolicy: Policy = {
                 id: `pol_${Date.now()}`,
                 enabled: true,
-                ...policyArgs as Omit<Policy, 'id' | 'enabled'>,
+                name: args.name,
+                if: {
+                    sourceDID: args.if.sourceDID,
+                    destinationDID: args.if.destinationDID,
+                    condition: args.if.condition,
+                    ...(args.if.networkLayer && { networkLayer: args.if.networkLayer }),
+                },
+                then: {
+                    action: args.then.action,
+                    protocol: args.then.protocol,
+                },
+                generatedBy: 'AI',
+                rationale: args.rationale,
             };
             return newPolicy;
         }

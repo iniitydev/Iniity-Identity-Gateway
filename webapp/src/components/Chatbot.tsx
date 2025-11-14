@@ -26,7 +26,6 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, onClose }) => {
   const chatInstance = useRef<Chat | null>(null);
 
   useEffect(() => {
-    // Fix: Initialize chat instance once without API key dependency.
     if (!chatInstance.current) {
       chatInstance.current = getChatSession(CHATBOT_SYSTEM_INSTRUCTION);
     }

@@ -50,20 +50,23 @@ export const ArchitectureDiagram: React.FC<ArchitectureDiagramProps> = ({ active
                     <SystemBox title="Zitadel" subtitle="Core IdP" color="border-indigo-500" isActive={isSystemActive('Zitadel')} />
                 </div>
                 
-                {/* Column 4: Arrow to App */}
-                 <Arrow text="Proxy User" isActive={isFlowActive('Authentik', 'Nextcloud')} />
+                {/* Column 4: Arrow to Apps */}
+                 <Arrow text="Proxy User" isActive={isFlowActive('Authentik', 'Desk.cx') || isFlowActive('Authentik', 'Iniity User Center')} />
 
-                {/* Column 5: Application */}
-                <SystemBox title="Nextcloud" subtitle="User Plane" color="border-fuchsia-500" isActive={isSystemActive('Nextcloud')} />
+                {/* Column 5: Applications */}
+                <div className="space-y-4">
+                    <SystemBox title="Iniity User Center" subtitle="Management Fabric" color="border-sky-500" isActive={isSystemActive('Iniity User Center')} />
+                    <SystemBox title="Desk.cx" subtitle="User Plane" color="border-fuchsia-500" isActive={isSystemActive('Desk.cx')} />
+                </div>
             </div>
              {/* SCIM Provisioning Arrow - this is a more complex path */}
             <div className="relative mt-8 flex justify-center items-center h-16">
                  <div className="absolute top-0 w-0.5 h-8 bg-gray-700" style={{ left: 'calc(50% + 40px)' }}></div>
-                <div className={`absolute top-8 h-0.5 ${isFlowActive('Zitadel', 'Nextcloud') ? 'bg-indigo-400' : 'bg-gray-700'} transition-colors duration-300`} style={{ left: 'calc(50% - 160px)', right: 'calc(50% + 40px)' }}></div>
+                <div className={`absolute top-8 h-0.5 ${isFlowActive('Zitadel', 'Desk.cx') ? 'bg-indigo-400' : 'bg-gray-700'} transition-colors duration-300`} style={{ left: 'calc(50% - 160px)', right: 'calc(50% + 40px)' }}></div>
                 <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-0.5 h-8 bg-gray-700" style={{ left: 'calc(50% - 160px)' }}></div>
-                <span className={`absolute top-6 left-1/2 transform -translate-x-full bg-gray-900/50 px-2 text-xs ${isFlowActive('Zitadel', 'Nextcloud') ? 'text-white font-bold' : 'text-indigo-400'} font-mono transition-colors duration-300`} style={{left: 'calc(50% - 20px)'}}>SCIM Provisioning</span>
+                <span className={`absolute top-6 left-1/2 transform -translate-x-full bg-gray-900/50 px-2 text-xs ${isFlowActive('Zitadel', 'Desk.cx') ? 'text-white font-bold' : 'text-indigo-400'} font-mono transition-colors duration-300`} style={{left: 'calc(50% - 20px)'}}>SCIM Provisioning</span>
                 <div className="absolute bottom-0 transform -translate-x-1/2 left-1/2" style={{left: 'calc(50% - 160px)'}}>
-                    <svg width="12" height="12" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className={`transform ${isFlowActive('Zitadel', 'Nextcloud') ? 'text-indigo-400' : 'text-gray-500'} transition-colors duration-300 rotate-90`}>
+                    <svg width="12" height="12" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" className={`transform ${isFlowActive('Zitadel', 'Desk.cx') ? 'text-indigo-400' : 'text-gray-500'} transition-colors duration-300 rotate-90`}>
                         <path d="M5 10L10 5L5 0" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
                     </svg>
                 </div>

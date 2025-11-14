@@ -23,7 +23,6 @@ export const DataFlowVisualizer: React.FC<DataFlowVisualizerProps> = ({ steps })
   }
 
   const activeStep = steps[currentStepIndex];
-  // Fix: Corrected typo from `active-Step.to` to `activeStep.to`.
   const activeSystems = [activeStep.from, activeStep.to].filter(s => s !== 'Admin' && s !== 'System');
   const activeFlow = { from: activeStep.from, to: activeStep.to };
 
